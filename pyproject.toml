@@ -24,6 +24,26 @@ dev = [
     "pytest>=8.0",
     "pytest-cov>=4.0",
 ]
+ui-jupyter = [
+    "ipywidgets>=8.0",
+    "jupyter>=1.0",
+    "notebook>=7.0",
+]
+ui-web = [
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+]
+ui-tui = [
+    "textual>=0.60",
+    "rich>=13.0",
+]
+ui-all = [
+    "speculator-ev-engine[ui-jupyter,ui-web,ui-tui]",
+]
+
+[project.scripts]
+seve-tui = "speculator_ev_engine.ui.tui.app:main"
+seve-web = "speculator_ev_engine.ui.web.app:main"
 
 [tool.setuptools.packages.find]
 include = ["speculator_ev_engine*"]

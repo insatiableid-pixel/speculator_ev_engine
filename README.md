@@ -133,6 +133,23 @@ review = review_decisions(decisions)
 print(format_review(review))
 ```
 
+## UI
+
+Three interfaces over the same shared chart engine. All charts from `ui/core/charts/` — no logic duplication.
+
+```bash
+pip install -e ".[ui-all]"     # everything
+pip install -e ".[ui-tui]"     # terminal only
+pip install -e ".[ui-web]"     # FastAPI + dark theme frontend
+pip install -e ".[ui-jupyter]" # ipywidgets notebooks
+```
+
+**Terminal** — `seve-tui`. Textual app, keyboard-first, mouse-optional. Left nav, right output, bottom context strip. Degrades to 16 colors gracefully.
+
+**Jupyter** — four notebooks (`kelly.ipynb`, `icm.ipynb`, `sports.ipynb`, `decisions.ipynb`) with ipywidgets sliders driving live chart updates.
+
+**Web** — `seve-web`. FastAPI backend, single-page dark frontend with Plotly.js, persistent context strip pinned to viewport, no page reloads.
+
 ## Design Principles
 
 1. **EV is the universal unit.** Every module speaks expected value. Results are tracked separately from decision quality.

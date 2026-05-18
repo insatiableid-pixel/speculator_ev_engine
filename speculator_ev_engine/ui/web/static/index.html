@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>speculator_ev_engine</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="context-strip">
+  <span id="ctx-bankroll">Bankroll: $1,000.00</span>
+  <span class="ctx-sep">│</span>
+  <span id="ctx-kelly">Kelly: 0.0%</span>
+  <span class="ctx-sep">│</span>
+  <span id="ctx-ev">Session EV: +0.000</span>
+  <span class="ctx-sep">│</span>
+  <span id="ctx-tilt" class="tilt-hidden">TILT</span>
+</div>
+
+<nav id="nav">
+  <button data-tab="kelly" class="active">Kelly</button>
+  <button data-tab="icm">ICM</button>
+  <button data-tab="sports">Sports</button>
+  <button data-tab="decisions">Decisions</button>
+</nav>
+
+<main id="content">
+  <section id="tab-kelly" class="tab active">
+    <div class="panel">
+      <label>Win Probability <input type="number" id="k-p" value="0.55" min="0" max="1" step="0.01"></label>
+      <label>Decimal Odds <input type="number" id="k-b" value="1.0" min="0.01" step="0.1"></label>
+      <label>Fraction <input type="number" id="k-f" value="0.5" min="0.01" max="1" step="0.05"></label>
+      <label>Edge σ <input type="number" id="k-es" value="0.0" min="0" step="0.005"></label>
+      <button id="kelly-go">Compute</button>
+    </div>
+    <div id="kelly-out" class="output"></div>
+  </section>
+
+  <section id="tab-icm" class="tab">
+    <div class="panel">
+      <label>Stacks (csv) <input type="text" id="i-stacks" value="5000,3000,2000"></label>
+      <label>Payouts (csv) <input type="text" id="i-payouts" value="500,300,200"></label>
+      <label>Blend <input type="number" id="i-blend" value="1.0" min="0" max="1" step="0.05"></label>
+      <button id="icm-go">Compute</button>
+    </div>
+    <div id="icm-out" class="output"></div>
+  </section>
+
+  <section id="tab-sports" class="tab">
+    <div class="panel">
+      <label>Model Prob <input type="number" id="s-mp" value="0.55" min="0" max="1" step="0.01"></label>
+      <label>American Odds <input type="number" id="s-odds" value="-110"></label>
+      <label>Other Side Odds <input type="number" id="s-other" value="-110"></label>
+      <button id="sports-edge-go">Edge</button>
+    </div>
+    <div class="panel">
+      <label>Open Odds <input type="number" id="s-open" value="-110"></label>
+      <label>Close Odds <input type="number" id="s-close" value="-105"></label>
+      <button id="sports-clv-go">CLV</button>
+    </div>
+    <div id="sports-out" class="output"></div>
+  </section>
+
+  <section id="tab-decisions" class="tab">
+    <div class="panel">
+      <label>Decision <input type="text" id="d-dec" value=""></label>
+      <label>P estimate <input type="number" id="d-p" value="0.55" min="0" max="1" step="0.01"></label>
+      <label>EV estimate <input type="number" id="d-ev" value="0.1" step="0.01"></label>
+      <label>Stake <input type="number" id="d-stake" value="100" min="0" step="1"></label>
+      <label>Domain
+        <select id="d-domain"><option>poker</option><option>sports</option><option>markets</option><option>general</option></select>
+      </label>
+      <button id="dec-log-go">Log</button>
+    </div>
+    <div class="panel">
+      <label>Row ID <input type="number" id="d-rid" value="1" min="1" step="1"></label>
+      <label>Outcome <input type="number" id="d-outcome" value="1" step="0.1"></label>
+      <button id="dec-resolve-go">Resolve</button>
+    </div>
+    <div id="decisions-out" class="output"></div>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
